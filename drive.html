@@ -2,109 +2,65 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Drive Clone</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      background-color: #4285f4;
+      color: white;
+      padding: 10px;
+      text-align: center;
+    }
+
+    main {
+      display: flex;
+    }
+
+    aside {
+      width: 200px;
+      background-color: #f0f0f0;
+      padding: 10px;
+      box-shadow: 1px 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    section {
+      flex-grow: 1;
+      padding: 20px;
+    }
+
+    .folder {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body>
-  <div class="navbar-fixed">
-    <nav class="nav-extended white">
-      <div class="nav-wrapper white">
-        <ul>
-          <li>
-            <a href="#!" class="title grey-text text-darken-1">Google Drive</a>
-          </li>
-        </ul>
-        <div class="search-wrapper">
-          <i class="material-icons">search</i>
-          <input type="search" name="Search" placeholder="Search Drive" />
-        </div>
-        <ul class="right">
-          <li>
-            <a href="#!"><i class="material-icons grey-text text-darken-1">apps</i></a>
-          </li>
-          <li>
-            <a href="#!"><i class="material-icons grey-text text-darken-1">notifications</i></a>
-          </li>
-          <li>
-            <a href="#!"><img src="data:image/jpeg;base64,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"></a>
-          </li>
-        </ul>
-      </div>
-      <div class="nav-wrapper nav-2">
-        <ul>
-          <li>
-            <a class="waves-effect waves-light btn btn-flat white-text">New</a>
-          </li>
-        </ul>
-        <ul class="right">
-          <li>
-            <a href="#!"><i class="material-icons grey-text text-darken-1">view_list</i></a>
-          </li>
-          <li>
-            <a href="#!"><i class="material-icons grey-text text-darken-1">info</i></a>
-          </li>
-          <li>
-            <a href="#!"><i class="material-icons grey-text text-darken-1">settings</i></a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </div>
-  <ul class="side-nav fixed floating transparent z-depth-0">
-    <li class="active">
-      <a href="#"><i class="material-icons blue-text text-darken-1">dashboard</i>My Drive</a>
-    </li>
-    <li>
-      <a href="#"><i class="material-icons">devices</i>Computers</a>
-    </li>
-    <li>
-      <a href="#"><i class="material-icons">people</i>Shared with me</a>
-    </li>
-    <li>
-      <a href="#"><i class="material-icons">access_time</i>Recent</a>
-    </li>
-    <li>
-      <a href="#"><i class="material-icons">camera</i>Google Photos</a>
-    </li>
-    <li>
-      <a href="#"><i class="material-icons">star</i>Starred</a>
-    </li>
-    <li>
-      <a href="#"><i class="material-icons">delete</i>Trash</a>
-    </li>
-    <li>
-      <div class="divider"></div>
-    </li>
-    <li>
-      <a href="#"><i class="material-icons">cloud</i>Backups</a>
-    </li>
-    <li>
-      <div class="divider"></div>
-    </li>
-    <li>
-      <a href="#"><i class="material-icons">storage</i>Upgrade storage</a>
-    </li>
-  </ul>
-
-  <div class="main">
-    <div class="container-fluid">
-      <p class="subheader">Folders</p>
-      <div class="card-panel folder">
-        <i class="material-icons left">folder</i> Folder
-      </div>
-      <div class="card-panel folder">
-        <i class="material-icons left">folder</i> Folder
-      </div>
-    </div>
-  </div>
-
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+  <header>
+    <h1>Google Drive</h1>
+  </header>
+  <main>
+    <aside>
+      <div class="folder">Folder 1</div>
+      <div class="folder">Folder 2</div>
+      <div class="folder">Folder 3</div>
+    </aside>
+    <section>
+      <h2>Folders</h2>
+      <div class="folder">Folder 1 Content</div>
+      <div class="folder">Folder 2 Content</div>
+      <div class="folder">Folder 3 Content</div>
+    </section>
+  </main>
 </body>
 
 </html>
